@@ -21,8 +21,8 @@ export function QuantityStepper({
       <button
         type="button"
         className="quantity-stepper__button"
-        onClick={() => onChange((current) => Math.max(1, current - 1))}
-        disabled={value <= 1}
+        onClick={() => onChange((current) => Math.max(0, current - 1))}
+        disabled={value <= 0}
         aria-label={`Diminuir quantidade de ${productName}`}
       >
         <Minus size={16} strokeWidth={2.5} aria-hidden="true" />

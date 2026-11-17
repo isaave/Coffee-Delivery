@@ -46,7 +46,10 @@
       `components/ProductCard.tsx`, `components/QuantityStepper.tsx`
 - [x] `pages/CatalogPage.tsx` com grade responsiva (4 → 3 → 2 → 1 colunas)
 - [x] Integração com `CartContext` (adicionar a quantidade do stepper ao carrinho)
-- [x] Assets PNG extraídos do Figma + fonte Roboto
+- [x] Assets PNG extraídos do Figma + logo/fundo do hero oficiais + fontes Roboto e Baloo 2
+- [x] Paleta canônica do Figma aplicada (roxo `#8047F8`/`#4B2995`, amarelo
+      `#DBAC2C`/`#C47F17`, fundo `#FAFAFA`, card `#F3F2F2`) e medidas de referência
+      (header 104px, hero 544px, cards 120px, grade `minmax(15.25rem, 1fr)`)
 - [x] Testes unitários atualizados (18 testes)
 - [x] Critério de aceite: catálogo responsivo, filtros por categoria e adicionar ao
       carrinho funcionando (validação no navegador)

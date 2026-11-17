@@ -11,12 +11,14 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(0)
   const { addItem } = useCart()
+  const price = formatCurrency(product.priceInCents).replace('R$', '').trim()
 
   function handleAdd() {
+    if (quantity < 1) return
     addItem(product.id, quantity)
-    setQuantity(1)
+    setQuantity(0)
   }
 
   return (
@@ -24,8 +26,10 @@ export function ProductCard({ product }: ProductCardProps) {
       <img
         className="product-card__image"
         src={product.image}
-        alt={`Embalagem de ${product.name}`}
+        alt={`Pires e a xícara de café ${product.name}`}
         loading="lazy"
+        width={120}
+        height={120}
       />
 
       <ul className="product-card__tags" aria-label="Características do café">
@@ -41,7 +45,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
       <div className="product-card__footer">
         <span className="product-card__price">
-          {formatCurrency(product.priceInCents)}
+          R$ <strong>{price}</strong>
         </span>
 
         <div className="product-card__actions">
@@ -54,9 +58,10 @@ export function ProductCard({ product }: ProductCardProps) {
             type="button"
             className="product-card__add"
             onClick={handleAdd}
+            disabled={quantity < 1}
             aria-label={`Adicionar ${quantity} ${product.name} ao carrinho`}
           >
-            <ShoppingCart size={18} strokeWidth={2.2} aria-hidden="true" />
+            <ShoppingCart size={22} fill="currentColor" aria-hidden="true" />
           </button>
         </div>
       </div>

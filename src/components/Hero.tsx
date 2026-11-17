@@ -1,27 +1,11 @@
-import { Coffee, Package, ShoppingBag, Truck } from 'lucide-react'
+import { Coffee, Package, ShoppingCart, Timer } from 'lucide-react'
 import './Hero.css'
 
 const benefits = [
-  {
-    icon: ShoppingBag,
-    text: 'Compra simples e segura',
-    tone: 'yellow',
-  },
-  {
-    icon: Package,
-    text: 'Embalagem mantém o café intacto',
-    tone: 'gray',
-  },
-  {
-    icon: Truck,
-    text: 'Entrega rápida e rastreada',
-    tone: 'orange',
-  },
-  {
-    icon: Coffee,
-    text: 'O café chega fresquinho até você',
-    tone: 'yellow',
-  },
+  { icon: ShoppingCart, text: 'Compra simples e segura', tone: 'yellow-dark' },
+  { icon: Timer, text: 'Embalagem mantém o café intacto', tone: 'text' },
+  { icon: Package, text: 'Entrega rápida e rastreada', tone: 'yellow' },
+  { icon: Coffee, text: 'O café chega fresquinho até você', tone: 'primary' },
 ] as const
 
 export function Hero() {
