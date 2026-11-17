@@ -88,13 +88,13 @@
   border: 0;
   border-radius: var(--radius-sm);
   background-color: var(--color-primary-dark);
-  color: var(--color-card);
+  color: var(--color-on-primary);
   cursor: pointer;
   transition: background-color 160ms ease;
 }
 
 .product-card__add:hover:not(:disabled) {
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-surface-hover);
 }
 
 .product-card__add:disabled {

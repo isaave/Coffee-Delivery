@@ -63,23 +63,26 @@
   height: 32px;
   padding: 8px;
   border-radius: var(--radius-full);
-  color: var(--color-white);
 }
 
 .hero__benefit-icon--yellow-dark {
   background-color: var(--color-yellow-dark);
+  color: var(--color-on-yellow);
 }
 
 .hero__benefit-icon--text {
-  background-color: var(--color-text);
+  background-color: var(--color-icon-neutral-bg);
+  color: var(--color-white);
 }
 
 .hero__benefit-icon--yellow {
   background-color: var(--color-yellow);
+  color: var(--color-on-yellow);
 }
 
 .hero__benefit-icon--primary {
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-dark);
+  color: var(--color-on-primary);
 }
 
 .hero__image {

@@ -23,11 +23,11 @@
 
 .category-filter__button:hover {
   background-color: var(--color-yellow);
-  color: var(--color-white);
+  color: var(--color-on-yellow);
 }
 
 .category-filter__button--active,
 .category-filter__button--active:hover {
   background-color: var(--color-primary-dark);
-  color: var(--color-white);
+  color: var(--color-on-primary);
 }

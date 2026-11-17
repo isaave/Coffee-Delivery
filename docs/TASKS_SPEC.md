@@ -24,6 +24,11 @@
 - [x] Implementar `contexts/ThemeProvider.tsx` + `contexts/themeContext.ts` + `hooks/useTheme.ts`
 - [x] Aplicar `data-theme` no `<html>` com fallback `prefers-color-scheme` e script anti-FOUC
 - [x] Validar contraste AA e foco visível (Lighthouse: Acessibilidade 100, Best Practices 100, SEO 100)
+- [x] Tokens semânticos de foreground (`--color-on-yellow`, `--color-on-primary`,
+      `--color-icon-neutral-bg`, `--color-primary-surface-hover`) para que ícones e
+      estados de hover mantenham contraste AA nos dois temas
+- [x] Teste de regressão de contraste (`src/tests/contrast.test.ts`) cobrindo pares
+      que o Lighthouse não avalia (hover e ícones SVG)
 - [x] Critério de aceite: alternar tema funciona e persiste após recarregar
 
 ---

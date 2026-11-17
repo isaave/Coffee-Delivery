@@ -57,13 +57,16 @@
   border: 0;
   border-radius: var(--radius-sm);
   background-color: var(--color-yellow-light);
-  color: var(--color-yellow-dark);
+  color: var(--color-tag-text);
   cursor: pointer;
-  transition: background-color 160ms ease;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
 }
 
 .cart-button:hover {
   background-color: var(--color-yellow);
+  color: var(--color-on-yellow);
 }
 
 .cart-button__badge {

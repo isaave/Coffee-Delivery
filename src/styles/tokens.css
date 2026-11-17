@@ -29,13 +29,14 @@
   --color-primary-hover: #4b2995;
   --color-primary-dark: #4b2995;
   --color-primary-light: #ebe5f9;
-  --color-on-primary: #f3f2f2;
+  --color-on-primary: #ffffff;
+  --color-primary-surface-hover: #8047f8;
 
   /* Amarelo (destaque) */
   --color-yellow: #dbac2c;
   --color-yellow-dark: #c47f17;
   --color-yellow-light: #f1e9c9;
-  --color-on-yellow: #ffffff;
+  --color-on-yellow: #1f1305;
 
   /* Hero */
   --color-hero-text: #ffffff;
@@ -46,6 +47,7 @@
   --color-tag-text: #965a0e;
   --color-badge: var(--color-yellow-dark);
   --color-on-badge: var(--color-white);
+  --color-icon-neutral-bg: #574f4d;
   --color-focus: var(--color-primary);
   --color-danger: #a31621;
   --color-success: #1b5e20;
@@ -107,7 +109,9 @@
   --color-primary-hover: #c3a1ff;
   --color-primary-dark: #8047f8;
   --color-primary-light: #342a4a;
-  --color-on-primary: #14110f;
+  --color-on-primary: #ffffff;
+  /* Hover mais escuro para manter o ícone claro legível (6.59:1). */
+  --color-primary-surface-hover: #6d38d6;
 
   --color-yellow: #e8bd57;
   --color-yellow-dark: #dbac2c;
@@ -121,6 +125,7 @@
   --color-tag-text: #f0d08a;
   --color-badge: var(--color-yellow-dark);
   --color-on-badge: #1f1305;
+  --color-icon-neutral-bg: #3a322b;
   --color-focus: var(--color-primary);
   --color-danger: #ff8a8a;
   --color-success: #8fd99a;
