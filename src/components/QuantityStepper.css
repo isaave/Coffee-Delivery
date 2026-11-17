@@ -1,0 +1,37 @@
+.quantity-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface);
+}
+
+.quantity-stepper__button {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background-color: transparent;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+.quantity-stepper__button:hover:not(:disabled) {
+  background-color: var(--color-surface-alt);
+}
+
+.quantity-stepper__button:disabled {
+  color: var(--color-text-muted);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantity-stepper__value {
+  min-width: 26px;
+  text-align: center;
+  font-size: var(--text-sm);
+  font-weight: 700;
+}

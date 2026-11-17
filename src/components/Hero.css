@@ -1,0 +1,102 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-hero);
+  color: var(--color-hero-text);
+}
+
+.hero__content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 520px;
+  padding-block: var(--space-8);
+}
+
+.hero__copy {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+}
+
+.hero h1 {
+  margin-bottom: var(--space-4);
+  font-size: clamp(2rem, 4.2vw, 3rem);
+  font-weight: 900;
+  line-height: 1.18;
+  color: var(--color-hero-text);
+}
+
+.hero__copy > p {
+  margin-bottom: var(--space-8);
+  font-size: var(--text-lg);
+  color: #d8d0c7;
+}
+
+.hero__benefits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4) var(--space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero__benefit {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-base);
+  color: #e6ded5;
+}
+
+.hero__benefit-icon {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  color: #fff;
+}
+
+.hero__benefit-icon--yellow {
+  background-color: #c47a1f;
+}
+
+.hero__benefit-icon--gray {
+  background-color: #6b6259;
+}
+
+.hero__benefit-icon--orange {
+  background-color: #dbac2c;
+}
+
+.hero__image {
+  position: absolute;
+  right: -40px;
+  bottom: 0;
+  width: min(46%, 470px);
+  height: auto;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .hero__image {
+    display: none;
+  }
+
+  .hero__content {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero__benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__copy > p {
+    font-size: var(--text-base);
+  }
+}

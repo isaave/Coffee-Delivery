@@ -1,0 +1,111 @@
+.site-header {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-header__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 96px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-primary);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.brand__icon {
+  color: var(--color-primary);
+}
+
+.brand__name {
+  font-size: var(--text-lg);
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+.delivery-location {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-primary);
+  min-width: 0;
+}
+
+.delivery-location__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.delivery-location__label {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.delivery-location__address {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.cart-button {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background-color: transparent;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+.cart-button:hover {
+  background-color: var(--color-surface-alt);
+}
+
+.cart-button__badge {
+  position: absolute;
+  top: 0;
+  right: -2px;
+  display: grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding-inline: 4px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-badge);
+  color: var(--color-on-badge);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+@media (max-width: 640px) {
+  .delivery-location {
+    display: none;
+  }
+
+  .site-header__content {
+    min-height: 76px;
+  }
+}
