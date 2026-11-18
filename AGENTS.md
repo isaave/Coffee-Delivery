@@ -21,3 +21,13 @@ Help the student develop a complete, robust, accessible, and responsive e-commer
 3. **Explain Before Coding:** Explain the rationale, required hooks/components, and architecture decisions before providing code snippets.
 4. **Validate & Test:** Ensure code compiles without TypeScript errors, check accessibility/responsiveness, and verify business rules (e.g., unique product quantity accumulation, monetary rounding in BRL).
 5. **Review & Commit:** Summarize what changed, explain how to test it, and suggest semantic commit messages (`feat:`, `fix:`, `docs:`, `test:`, `refactor:`, `style:`).
+
+## Decisões registradas
+
+- **Branding:** manter a logo oficial do Figma em `public/images/logo.svg`. O item do
+  checklist que pede "logo criada com IA" foi conscientemente substituído por fidelidade
+  visual ao design de referência; o uso de IA no projeto é documentado em
+  `docs/AI_USAGE.md`.
+- **Publicação:** adiada por decisão do titular do repositório. O README registra o
+  link como pendente até que a URL de deploy seja definida.
+- **Pagamento:** sempre simulado. Nenhuma credencial, gateway ou segredo é usado.

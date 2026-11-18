@@ -6,7 +6,7 @@ import { products } from '@/data/products'
 import { normalizeTag, type Category } from '@/types/product'
 import './CatalogPage.css'
 
-export default function CatalogPage() {
+export function CatalogPage() {
   const [category, setCategory] = useState<Category>('TODOS')
 
   const visibleProducts = useMemo(() => {

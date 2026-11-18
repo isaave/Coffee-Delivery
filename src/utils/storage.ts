@@ -1,6 +1,7 @@
 export const STORAGE_KEYS = {
   cart: 'coffee-delivery:cart:v1',
   theme: 'coffee-delivery:theme:v1',
+  order: 'coffee-delivery:order:v1',
 } as const
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS]

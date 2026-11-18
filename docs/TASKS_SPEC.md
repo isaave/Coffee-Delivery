@@ -63,24 +63,45 @@
 
 ---
 
-## Tarefa 4 — Checkout e CEP
+## Tarefa 4 — Checkout e CEP ✅ CONCLUÍDA
 
-- [ ] `schemas/checkoutSchema.ts` (Zod)
-- [ ] `hooks/useCep.ts` (ViaCEP, loading/error/abort)
-- [ ] `pages/CheckoutPage.tsx` com React Hook Form
-- [ ] Cálculo de frete por região e total
-- [ ] Testes com mock de `fetch` e estados de erro
-- [ ] Critério de aceite: CEP preenche endereço; número/complemento manuais
+- [x] `types/checkout.ts` (endereço, pagamento, pedido e guarda `isOrder`)
+- [x] `schemas/checkoutSchema.ts` (Zod; CEP aceito com ou sem máscara)
+- [x] `utils/cep.ts` ( ViaCEP puro, normalização, `CepError` e abort)
+- [x] `hooks/useCep.ts` (estados `idle | loading | success | error` + abort de requisições obsoletas)
+- [x] `utils/shipping.ts` (RN-03: frete por UF, padrão R$ 14,90)
+- [x] `components/FormField.tsx` e `components/CartSummary.tsx` (controles de quantidade, remoção, estado vazio e totais)
+- [x] `pages/CheckoutPage.tsx` com React Hook Form + Zod e pagamento obrigatório
+- [x] Testes com mock de `fetch`: CEP válido, inválido, não encontrado, falha de rede e abort
+- [x] Testes do schema, do frete por região e da construção do pedido
+- [x] Correção encontrada na validação em navegador: CEP com máscara (`01310-100`) passou a ser aceito pelo schema
+- [x] Critério de aceite: CEP preenche rua/bairro/cidade/UF; número e complemento manuais; total recalculado por UF
+
+**Evidências:** `npm run test` (71 testes), `npm run lint`, `npm run build`, validação em navegador com ViaCEP real (CEP 01310-100 → São Paulo/SP e 59010-000 → Natal/RN, frete R$ 19,90).
 
 ---
 
-## Tarefa 5 — Confirmação de pedido e ajustes finais
+## Tarefa 5 — Confirmação de pedido e ajustes finais ✅ CONCLUÍDA
 
-- [ ] `pages/SuccessPage.tsx` com resumo do pedido
-- [ ] Roteamento completo (React Router)
-- [ ] Limpeza do carrinho após finalize
-- [ ] Revisão de acessibilidade e responsividade
-- [ ] Build de produção sem erros TypeScript
+- [x] `pages/SuccessPage.tsx` com snapshot do pedido, estado vazio e botão de retorno
+- [x] Roteamento completo (`/`, `/checkout`, `/success`, `*` → `/`), `App.tsx` fino
+- [x] Persistência do pedido em `coffee-delivery:order:v1` e limpeza do carrinho após confirmação
+- [x] Guardas: confirmação bloqueada com carrinho vazio ou formulário inválido
+- [x] Revisão de acessibilidade e responsividade (desktop, tablet e celular)
+- [x] Lighthouse 100/100/100 (acessibilidade, boas práticas, SEO) em Home, Checkout e Sucesso, nos temas claro e escuro
+- [x] Build de produção sem erros TypeScript
+
+---
+
+## Tarefa 6 — Evidências, documentação e entrega ✅ CONCLUÍDA
+
+- [x] `AGENTS.md` na raiz (renomeado de `agents_md.md`)
+- [x] README completo com stack, instalação, scripts, decisões, screenshots, Figma, branding e link de deploy pendente
+- [x] Uso de IA documentado em `docs/AI_USAGE.md` (4 evidências com prompts, resultados e commits)
+- [x] Demonstração do fluxo de compra em `docs/DEMO.md`
+- [x] Capturas de Home, Checkout, Sucesso e Dark Mode em mobile em `docs/screenshots/`
+- [x] Repositório público: https://github.com/isaave/Coffee-Delivery
+- [ ] Publicação da aplicação (link pendente por decisão do titular)
 
 ---
 
@@ -94,3 +115,4 @@
 | 3 | `feat: build responsive catalog with add-to-cart` |
 | 4 | `feat: add checkout form with CEP lookup and shipping` |
 | 5 | `feat: add order confirmation and final polish` |
+| 6 | `docs: add delivery evidence, screenshots and AI usage log` |

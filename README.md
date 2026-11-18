@@ -1,53 +1,145 @@
 # Coffee Delivery
 
-Trabalho final do curso de Single Page Application — e-commerce de cafés com catálogo, carrinho, checkout ViaCEP e confirmação de pedido.
+Trabalho final da disciplina de Single Page Application: e-commerce de cafés com
+catálogo filtrável, carrinho com `useReducer`, checkout com consulta ViaCEP, pagamento
+simulado e confirmação de pedido. Interface responsiva, acessível (WCAG 2.2 AA) e com
+tema claro/escuro persistente.
+
+**Repositório público:** https://github.com/isaave/Coffee-Delivery
+**Link de publicação:** _pendente_ (a aplicação ainda não foi publicada; ver [Publicação](#publicação)).
+
+## Objetivos
+
+- Exibir 12 cafés com imagem, nome, descrição, preço e seletor de quantidade.
+- Permitir adicionar, incrementar, decrementar e remover itens sem duplicar linhas.
+- Consultar uma API pública (ViaCEP) pelo CEP e preencher automaticamente rua, bairro,
+  cidade e UF, mantendo número e complemento como campos manuais.
+- Calcular subtotal, frete por região e total em BRL (centavos inteiros).
+- Validar o checkout com React Hook Form + Zod, exigir forma de pagamento e **não**
+  processar pagamento real.
+- Impedir confirmação com carrinho vazio ou formulário inválido e exibir comprovante
+  com os dados do pedido confirmado.
+- Manter light/dark persistente, contraste AA e layout utilizável de 320 a 1440 px.
+
+## Stack
+
+| Camada | Tecnologia |
+| --- | --- |
+| UI | React 19 + Vite 8 + TypeScript (strict, `erasableSyntaxOnly`) |
+| Navegação | React Router (`/`, `/checkout`, `/success`, fallback) |
+| Estado | Context API + `useReducer` (carrinho) e Context API (tema) |
+| Formulário | React Hook Form + Zod (`@hookform/resolvers`) |
+| API pública | ViaCEP (`https://viacep.com.br/ws/{cep}/json/`) |
+| Estilos | CSS com tokens semânticos (`tokens.css`) e fontes Roboto + Baloo 2 |
+| Testes | Vitest (testes unitários e de regressão de contraste) |
+| Lint | Oxlint |
 
 ## Requisitos
 
 - Node.js 20.19+ (recomendado: 22+)
 - npm 11+
 
-## Comandos
+## Instalação e scripts
 
 ```bash
 npm install
-npm run dev        # servidor de desenvolvimento
-npm run build      # checagem TypeScript + build de produção
+npm run dev        # servidor de desenvolvimento (http://127.0.0.1:5173)
+npm run build      # checagem TypeScript (tsc -b) + build de produção
 npm run lint       # oxlint
-npm test           # testes unitários (Vitest)
+npm test           # testes unitários (Vitest) — 71 testes
 npm run typecheck  # somente TypeScript
-npm run preview    # serve o build
+npm run preview    # serve o build de produção localmente
 ```
-
-## Documentação
-
-As especificações vivem em `docs/`:
-
-- `PRD_SPEC.md` — produto, histórias e regras de negócio
-- `TECH_SPEC.md` — stack, arquitetura e convenções
-- `TASKS_SPEC.md` — planejamento task a task
 
 ## Estrutura
 
 ```
 src/
-  components/  componentes reutilizáveis
-  pages/       páginas da aplicação
-  contexts/    ThemeProvider e CartProvider
-  reducers/    cartReducer
-  hooks/       useTheme, useCep
-  data/        dados locais dos produtos
-  types/       tipos compartilhados
-  schemas/     schemas Zod
-  utils/       storage, money, totals
-  styles/      tokens e estilos globais
-  tests/       testes
+  components/  Header, Hero, ProductCard, CartSummary, FormField, QuantityStepper...
+  pages/       CatalogPage, CheckoutPage, SuccessPage
+  contexts/    ThemeProvider, CartProvider (contexts separados para Fast Refresh)
+  reducers/    cartReducer (puro e imutável)
+  hooks/       useTheme, useCart, useCep
+  data/        products.ts (12 cafés tipados)
+  types/       product, cart, theme, checkout
+  schemas/     checkoutSchema (Zod)
+  utils/       storage, money, totals, cep, shipping, order
+  styles/      tokens.css, global.css
+  tests/       reducer, guards, dinheiro, totais, contraste, schema, CEP, frete, pedido
+docs/
+  PRD_SPEC.md      produto, histórias, RFs e RNs
+  TECH_SPEC.md     stack, arquitetura e convenções
+  TASKS_SPEC.md    planejamento task a task e status
+  AI_USAGE.md      evidências do uso de IA
+  DEMO.md          demonstração do fluxo de compra
+  screenshots/     capturas desktop/mobile, claro/escuro
+AGENTS.md            instruções e decisões para agentes
 ```
 
-## Acessibilidade
+`App.tsx` é uma camada fina: apenas provedores, layout e rotas. Toda regra de negócio
+vive em reducers, hooks, schemas e utilitários testados.
 
-Tema claro/escuro com contraste AA, foco visível, alvos de toque de 44px e suporte a `prefers-reduced-motion`.
+## Decisões
 
-## Nota sobre `npm audit`
+- **Pagamento:** simulado. Não há gateway, credenciais ou `fetch` de pagamento.
+- **Frete (RN-03):** por UF — Norte R$ 25,90, Nordeste R$ 19,90, Centro-Oeste R$ 22,90,
+  Sudeste R$ 14,90, Sul R$ 12,90; padrão R$ 14,90 quando a UF é desconhecida. Um CEP
+  inválido nunca altera o frete.
+- **Valores:** sempre em centavos inteiros e formatados com `Intl.NumberFormat('pt-BR')`.
+- **Persistência:** chaves versionadas `coffee-delivery:cart:v1`,
+  `coffee-delivery:theme:v1` e `coffee-delivery:order:v1`, todas validadas antes do uso.
+- **Branding:** a logo oficial do Figma foi mantida em `public/images/logo.svg` para
+  fidelidade visual. O item "logo criada com IA" do enunciado foi substituído por essa
+  decisão; o uso de IA está registrado em `docs/AI_USAGE.md`.
+- **Publicação:** adiada por decisão do titular do repositório; ver abaixo.
+- **`npm audit`:** o Vite 8 depende de `picomatch@4.0.7`, com a advisory
+  GHSA-fc5q-39xc-vjpf (ReDoS em globs) sem versão corrigida publicada. É dependência
+  exclusiva de dev/build e os padrões de glob não vêm de entrada do usuário; risco
+  prático baixo neste projeto.
 
-O Vite 8 depende de `picomatch@4.0.7`, que possui a advisory GHSA-fc5q-39xc-vjpf (ReDoS em globs) **sem versão corrigida publicada até o momento**. É uma dependência exclusiva de desenvolvimento (build/dev server); o risco prático neste projeto é baixo porque os padrões de glob não vêm de entrada do usuário. Versões antigas do Vite foram avaliadas e descartadas por conterem falhas mais graves no dev server.
+## Design de referência
+
+- **Figma:** https://www.figma.com/design/yGPNTA0Yczb183EikXGIiA/Coffee-Delivery-%E2%80%A2-Projeto-Final-React?node-id=0-1&t=OlmxjofHqaQgxTZg-1
+- Paleta canônica: roxo `#8047F8` / `#4B2995`, amarelo `#DBAC2C` / `#C47F17`,
+  fundo `#FAFAFA`, card `#F3F2F2`; tipografia Roboto e Baloo 2.
+- Assets (logo, fundo do hero, xícara e 12 cafés) extraídos do Figma e servidos em
+  `public/images/`.
+
+## Screenshots
+
+**Desktop — tema claro**
+
+| Home | Checkout | Sucesso |
+| --- | --- | --- |
+| ![Home desktop](docs/screenshots/home-desktop.png) | ![Checkout desktop](docs/screenshots/checkout-desktop.png) | ![Sucesso desktop](docs/screenshots/success-desktop.png) |
+
+**Mobile (390 px) — tema escuro**
+
+| Home | Checkout | Sucesso |
+| --- | --- | --- |
+| ![Home mobile dark](docs/screenshots/home-mobile-dark.png) | ![Checkout mobile dark](docs/screenshots/checkout-mobile-dark.png) | ![Sucesso mobile dark](docs/screenshots/success-mobile-dark.png) |
+
+O roteiro completo está em [`docs/DEMO.md`](docs/DEMO.md).
+
+## Acessibilidade e validação
+
+- Tokens semânticos com contraste WCAG 2.2 AA nos dois temas, incluindo hover e ícones;
+  foco visível, alvos de toque de 44 px e `prefers-reduced-motion`.
+- `contrast.test.ts` verifica 12 pares × 2 temas diretamente dos tokens CSS.
+- **71 testes** passando; `npm run lint` e `npm run build` sem erros
+  (1 aviso informativo do React Compiler em `useForm`).
+- **Lighthouse 100/100/100** (Acessibilidade, Boas Práticas, SEO) em Home, Checkout e
+  Sucesso, nos temas claro e escuro, sem falhas.
+- Validação manual em navegador: ViaCEP real, erros de CEP, validação de pagamento,
+  carrinho vazio, confirmação, persistência após refresh e dark mode nas três telas.
+
+## Uso de IA
+
+As evidências com prompts, resultados, arquivos e commits estão em
+[`docs/AI_USAGE.md`](docs/AI_USAGE.md).
+
+## Publicação
+
+O link da aplicação publicada ficará pendente até que o titular escolha a plataforma
+(Vercel, Netlify ou GitHub Pages) e forneça a URL. O build de produção já está pronto
+(`npm run build` → `dist/`).
