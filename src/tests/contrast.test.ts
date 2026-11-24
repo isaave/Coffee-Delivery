@@ -3,8 +3,9 @@ import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 
 /**
- * Regressão de contraste: o Lighthouse não avalia estados de hover nem ícones
- * SVG, então os pares semânticos são verificados diretamente nos tokens.
+ * Regressão de contraste: o Lighthouse não avalia estados de hover, ícones SVG
+ * nem bordas de controles, então todos os pares semânticos usados na interface
+ * são verificados diretamente nos tokens dos dois temas.
  */
 
 const tokensCss = readFileSync(
@@ -72,23 +73,59 @@ const themes = [
     name: 'escuro',
     tokens: parseTokens(extractBlock(/\[data-theme='dark'\]\s*\{([\s\S]*?)\}/)),
   },
+] as const
+
+/** [foreground, background, mínimo WCAG] — 4,5 para texto, 3 para ícones/UI. */
+const pairs: ReadonlyArray<readonly [string, string, number]> = [
+  // Texto (1.4.3)
+  ['--color-text', '--color-bg', 4.5],
+  ['--color-title', '--color-bg', 4.5],
+  ['--color-subtitle', '--color-bg', 4.5],
+  ['--color-text-muted', '--color-bg', 4.5],
+  ['--color-primary', '--color-bg', 4.5], // links
+  ['--color-tag-text', '--color-tag-bg', 4.5], // tags e filtros
+  ['--color-tag-text', '--color-card', 4.5], // ícone do carrinho
+  ['--color-on-yellow', '--color-yellow', 4.5], // botões amarelos
+  ['--color-on-yellow', '--color-yellow-dark', 4.5], // hover dos botões
+  ['--color-on-primary', '--color-primary-dark', 4.5], // botões roxos
+  ['--color-on-primary', '--color-primary-surface-hover', 4.5], // hover
+  ['--color-primary-text', '--color-primary-light', 4.5], // localização
+  ['--color-title', '--color-primary-light', 4.5], // pagamento selecionado
+  ['--color-text', '--color-surface', 4.5], // opção de pagamento
+  ['--color-text-muted', '--color-input', 4.5], // placeholder
+  ['--color-title', '--color-input', 4.5], // valor digitado
+  ['--color-text', '--color-card', 4.5], // preço
+  ['--color-title', '--color-card', 4.5], // títulos e totais
+  ['--color-subtitle', '--color-card', 4.5], // nome do produto
+  ['--color-text-muted', '--color-card', 4.5], // descrição e observações
+  ['--color-danger', '--color-card', 4.5], // erros de validação
+  ['--color-danger', '--color-surface-alt', 4.5], // ícone de remover em hover
+  ['--color-success', '--color-bg', 4.5], // ícone da tela de sucesso
+  ['--color-on-badge', '--color-badge', 4.5], // contador do carrinho
+  // Ícones e componentes de UI (1.4.11)
+  ['--color-primary-text', '--color-button', 3], // ícones do stepper
+  ['--color-white', '--color-icon-neutral-bg', 3], // benefício neutro
+  ['--color-primary-text', '--color-card', 3], // ícones dos detalhes
+  ['--color-success', '--color-card', 3], // ícone de sucesso no card
+  ['--color-primary', '--color-surface-alt', 3], // toggle de tema
+  ['--color-primary-hover', '--color-surface-alt', 3], // toggle em hover
+  ['--color-focus', '--color-bg', 3], // foco visível
+  ['--color-focus', '--color-card', 3], // foco dentro dos cards
+  ['--color-border', '--color-bg', 3], // bordas gerais
+  ['--color-border', '--color-card', 3], // divisórias e cards
+  ['--color-border', '--color-input', 3], // borda dos campos
+  ['--color-control-accent', '--color-surface', 3], // radio não marcado
+  ['--color-control-accent', '--color-primary-light', 3], // radio marcado
 ]
 
-/** [foreground, background, mínimo WCAG] — 4.5 para texto, 3 para ícones/UI. */
-const pairs: ReadonlyArray<readonly [string, string, number]> = [
-  ['--color-on-yellow', '--color-yellow', 4.5], // filtro em hover
-  ['--color-on-yellow', '--color-yellow-dark', 3], // ícone do benefício
-  ['--color-on-primary', '--color-primary-dark', 4.5], // filtro ativo / botão add
-  ['--color-on-primary', '--color-primary-surface-hover', 3], // botão add em hover
-  ['--color-white', '--color-icon-neutral-bg', 3], // benefício neutro
-  ['--color-tag-text', '--color-yellow-light', 4.5], // tags, filtro e ícone do carrinho
-  ['--color-on-badge', '--color-badge', 3], // badge decorativo
-  ['--color-primary-text', '--color-primary-light', 4.5], // localização
-  ['--color-primary-text', '--color-button', 3], // stepper
-  ['--color-text-muted', '--color-card', 4.5], // descrição
-  ['--color-subtitle', '--color-card', 4.5], // nome do produto
-  ['--color-text', '--color-card', 4.5], // preço
-]
+describe('tokens de tema', () => {
+  it('define os mesmos tokens de cor nos dois temas', () => {
+    const colorTokens = (tokens: TokenMap): string[] =>
+      [...tokens.keys()].filter((token) => token.startsWith('--color-')).sort()
+
+    expect(colorTokens(themes[1].tokens)).toEqual(colorTokens(themes[0].tokens))
+  })
+})
 
 describe.each(themes)('contraste do tema $name', ({ tokens }) => {
   it.each(pairs)('%s sobre %s', (foreground, background, minimum) => {

@@ -105,6 +105,22 @@
 
 ---
 
+## Tarefa 7 — Auditoria final de light/dark e contraste ✅ CONCLUÍDA
+
+**Objetivo:** garantir que ambos os temas estejam 100% corretos e em WCAG 2.2 AA em todas as telas.
+
+- [x] Auditoria de todas as declarações de cor: nenhuma cor fixa fora de `tokens.css`
+- [x] Correção das bordas no tema escuro (`#3d342d` → `#7f7166`: 3,28–3,99:1)
+- [x] Correção do número do badge no tema claro (texto `#1f1305`: 5,54:1)
+- [x] Novo token `--color-control-accent` para o radio marcado (4,42:1 no escuro)
+- [x] `contrast.test.ts` ampliado de 12 para 37 pares por tema + invariante de tokens
+- [x] Estilos computados verificados em Home, Checkout e Sucesso, claro e escuro
+- [x] Toggle/persistência confirmados após recarregar (`coffee-delivery:theme:v1`)
+- [x] Lighthouse 100/100/100 nas seis combinações, sem falhas
+- [x] `npm run test` (122 testes), `npm run lint`, `npm run build`
+
+---
+
 ## Convenção de commit sugerida por tarefa
 
 | Tarefa | Commit |
@@ -116,3 +132,4 @@
 | 4 | `feat: add checkout form with CEP lookup and shipping` |
 | 5 | `feat: add order confirmation and final polish` |
 | 6 | `docs: add delivery evidence, screenshots and AI usage log` |
+| 7 | `fix: enforce WCAG AA contrast across light and dark themes` |

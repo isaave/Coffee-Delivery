@@ -46,7 +46,7 @@ npm install
 npm run dev        # servidor de desenvolvimento (http://127.0.0.1:5173)
 npm run build      # checagem TypeScript (tsc -b) + build de produção
 npm run lint       # oxlint
-npm test           # testes unitários (Vitest) — 71 testes
+npm test           # testes unitários (Vitest) — 122 testes
 npm run typecheck  # somente TypeScript
 npm run preview    # serve o build de produção localmente
 ```
@@ -123,15 +123,22 @@ O roteiro completo está em [`docs/DEMO.md`](docs/DEMO.md).
 
 ## Acessibilidade e validação
 
-- Tokens semânticos com contraste WCAG 2.2 AA nos dois temas, incluindo hover e ícones;
-  foco visível, alvos de toque de 44 px e `prefers-reduced-motion`.
-- `contrast.test.ts` verifica 12 pares × 2 temas diretamente dos tokens CSS.
-- **71 testes** passando; `npm run lint` e `npm run build` sem erros
+- Tokens semânticos com contraste WCAG 2.2 AA nos dois temas, incluindo hover, ícones,
+  bordas de controle, placeholder, badge e estado marcado dos radios; foco visível,
+  alvos de toque de 44 px e `prefers-reduced-motion`.
+- `--color-on-yellow`, `--color-on-primary`, `--color-icon-neutral-bg`,
+  `--color-primary-surface-hover`, `--color-on-badge` e `--color-control-accent` garantem
+  que nenhum texto ou ícone dependa da cor do fundo.
+- `contrast.test.ts` verifica 37 pares × 2 temas diretamente dos tokens CSS mais uma
+  invariante de paridade de tokens (75 testes de tema).
+- **122 testes** passando; `npm run lint` e `npm run build` sem erros
   (1 aviso informativo do React Compiler em `useForm`).
 - **Lighthouse 100/100/100** (Acessibilidade, Boas Práticas, SEO) em Home, Checkout e
   Sucesso, nos temas claro e escuro, sem falhas.
 - Validação manual em navegador: ViaCEP real, erros de CEP, validação de pagamento,
   carrinho vazio, confirmação, persistência após refresh e dark mode nas três telas.
+- Estilos computados conferidos via DevTools nas três telas e nos dois temas: nenhum par
+  de texto/borda ficou abaixo de 4,5:1 (texto) ou 3:1 (ícones e UI).
 
 ## Uso de IA
 

@@ -129,7 +129,7 @@
 }
 
 .checkout__payment-option input {
-  accent-color: var(--color-primary-dark);
+  accent-color: var(--color-control-accent);
 }
 
 .checkout__empty {

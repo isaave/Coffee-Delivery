@@ -108,9 +108,11 @@ type CartAction =
 
 ## 8. Tematização e acessibilidade
 
-- Tokens semânticos em `styles/tokens.css`: `--color-bg`, `--color-surface`, `--color-text`, `--color-primary`, `--color-border`, `--color-focus`.
-- Sobrescrita dos tokens sob `[data-theme='dark']`.
-- Contraste AA; `:focus-visible` com `--color-focus`; toque mínimo de 44px em alvos interativos.
+- Tokens semânticos em `styles/tokens.css`: `--color-bg`, `--color-surface`, `--color-text`, `--color-primary`, `--color-border`, `--color-focus`,
+  além dos pares de foreground (`--color-on-yellow`, `--color-on-primary`, `--color-on-badge`, `--color-icon-neutral-bg`)
+  e de `--color-control-accent` para controles nativos.
+- Sobrescrita dos tokens sob `[data-theme='dark']`; os dois temas definem exatamente o mesmo conjunto de tokens de cor.
+- Contraste AA verificado por `contrast.test.ts` em 37 pares por tema (4,5:1 para texto, 3:1 para ícones/bordas); `:focus-visible` com `--color-focus`; toque mínimo de 44px em alvos interativos.
 
 ## 9. Persistência
 
